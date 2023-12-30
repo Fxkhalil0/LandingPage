@@ -21,6 +21,4 @@ app.get("*", (req, res)=>{
   res.sendFile(`${__dirname}/client/build/index.html`)
 })
 
-server.listen(5000, function () {
-  console.log("listen");
-});
+server.listen(process.env.PORT || 5000);
