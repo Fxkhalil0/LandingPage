@@ -14,9 +14,10 @@ app.use(cors());
 const userRoute = require("./Routers/userRoute");
 app.use("/user", userRoute);
 
-
-app.get("*", (req, res)=>{
-  res.sendFile(`${__dirname}/client/build/index.html`)
-})
+if(process.env.NODE_ENV === 'production'){
+  app.get("/*", (req, res)=>{
+    res.sendFile(`${__dirname}/client/build/index.html`)
+  })
+}
 
 server.listen(process.env.PORT || 5000);
