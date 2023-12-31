@@ -39,36 +39,35 @@ async function sendWelcomeEmail(userData) {
 
 
 const add = async (req, res) => {
-    res.send({message:"fff"})
-    // const { role, firstName, lastName, email, phone } = req.body
-    // const existingUser = await user.findOne({ email });
-    // if (!firstName) {
-    //     res.status(400).json({ message: "First Name is required" })
-    // }
-    // else if (!lastName) {
-    //     res.status(400).json({ message: "Last Name is required" })
-    // }
-    // else if (!email) {
-    //     res.status(400).json({ message: "Email is required" })
-    // }
-    // else if (!phone) {
-    //     res.status(400).json({ message: "Phone is required" })
-    // } else if (existingUser) {
-    //     return res.status(400).json({ message: "Your email already exists" });
-    // }
-    // else {
+    const { role, firstName, lastName, email, phone } = req.body
+    const existingUser = await user.findOne({ email });
+    if (!firstName) {
+        res.status(400).json({ message: "First Name is required" })
+    }
+    else if (!lastName) {
+        res.status(400).json({ message: "Last Name is required" })
+    }
+    else if (!email) {
+        res.status(400).json({ message: "Email is required" })
+    }
+    else if (!phone) {
+        res.status(400).json({ message: "Phone is required" })
+    } else if (existingUser) {
+        return res.status(400).json({ message: "Your email already exists" });
+    }
+    else {
 
-    //     const userData = await user.create({
-    //         role: role,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         email: email,
-    //         phone: phone
-    //     })
-    //     console.log(userData)
-    //     sendWelcomeEmail(userData)
-    //     res.status(200).json({ userData })
-    // }
+        const userData = await user.create({
+            role: role,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone
+        })
+        console.log(userData)
+        sendWelcomeEmail(userData)
+        res.status(200).json({ userData })
+    }
 }
 
 module.exports = { add };
