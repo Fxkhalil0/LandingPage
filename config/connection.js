@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/Project')
+mongoose.connect('mongodb+srv://lvw:LVW123456789@cluster0.9bdwe65.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
   console.log('Connected to MongoDB');
 })
