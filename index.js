@@ -9,7 +9,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
 
-app.use(cors());
+app.use(cors({
+  origin: "https://lvw-react-app-34cbad5a2068.herokuapp.com/",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials such as cookies to be sent
+}));
 
 const userRoute = require("./Routers/userRoute");
 app.use("/user", userRoute);
