@@ -39,7 +39,7 @@ async function sendWelcomeEmail(userData) {
 
 
 const add = async (req, res) => {
-    res.send("test issue")
+    res.send({message:"fff"})
     // const { role, firstName, lastName, email, phone } = req.body
     // const existingUser = await user.findOne({ email });
     // if (!firstName) {
