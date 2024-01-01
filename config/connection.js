@@ -1,8 +1,27 @@
-const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://lvw:LVW123456789@cluster0.9bdwe65.mongodb.net/Project?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((error) => {
-  console.error('Error connecting to MongoDB', error);
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const uri = process.env.MONGODB_URI;
+console.log('MongoDB URI:', uri);
+
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
+
+async function run() {
+  try {
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
+run().catch(console.dir);
